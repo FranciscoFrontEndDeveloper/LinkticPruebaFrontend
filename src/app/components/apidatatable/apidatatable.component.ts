@@ -4,7 +4,9 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { JsonplaceholderService } from '../../services/jsonplaceholder.service';
+import { Jsonplaceholderinterface } from '../../jsonplaceholderinterface';
+import { MatCardModule } from '@angular/material/card';
 const FRUITS: string[] = [
   'blueberry',
   'lychee',
@@ -55,11 +57,26 @@ const NAMES: string[] = [
 export class ApidatatableComponent {
   displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
   dataSource: MatTableDataSource<UserData>;
-@ViewChild(MatPaginator) paginator!: MatPaginator;
-@ViewChild(MatSort) sort!: MatSort;
-  constructor() {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  private jsonApiUrl = 'https://jsonplaceholder.typicode.com/posts';
+  constructor(private jsonplaceholderService: JsonplaceholderService) {
     const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
     this.dataSource = new MatTableDataSource(users);
+  }
+    ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.jsonplaceholderService
+      .getApiData<Jsonplaceholderinterface[]>(this.jsonApiUrl)
+      .subscribe((jsonplace: Jsonplaceholderinterface[]) => {
+        console.group('app-genericview');
+        console.log(jsonplace);
+        console.groupEnd();
+        console.group('object keys');
+        console.log(Object.keys(jsonplace[0]));
+        console.groupEnd();
+      });
   }
     ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
