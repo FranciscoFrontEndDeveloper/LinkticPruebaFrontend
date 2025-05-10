@@ -11,7 +11,7 @@ export class JsonplaceholderService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getPostJson(): Observable<Jsonplaceholderinterface[]> {
-    return this.httpClient.get<Jsonplaceholderinterface[]>(this.jsonApiUrl);
+  getApiData<T>(apiUrl: string): Observable<Jsonplaceholderinterface[]> {
+    return this.httpClient.get<Jsonplaceholderinterface[]>(apiUrl);
   }
 }
