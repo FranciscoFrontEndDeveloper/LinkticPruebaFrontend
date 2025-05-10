@@ -55,11 +55,14 @@ export class ApidatatableComponent implements AfterViewInit {
 
         // Asignar los datos a la tabla
         this.dataSource.data = response;
+        this.dataSource = new MatTableDataSource(response);
+      this.dataSource.paginator = this.paginator; 
       });
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    
     this.dataSource.sort = this.sort;
   }
 
@@ -70,5 +73,8 @@ export class ApidatatableComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  openModal() {
+    console.log('Se abrio el modal')
   }
 }
