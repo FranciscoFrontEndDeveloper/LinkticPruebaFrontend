@@ -1,109 +1,74 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatSort, MatSortModule} from '@angular/material/sort';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {MatInputModule} from '@angular/material/input';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { JsonplaceholderService } from '../../services/jsonplaceholder.service';
 import { Jsonplaceholderinterface } from '../../jsonplaceholderinterface';
 import { MatCardModule } from '@angular/material/card';
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
+import { NgForOf } from '@angular/common';
 
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-
-  export interface UserData {
+export interface UserData {
   id: string;
   name: string;
   progress: string;
   fruit: string;
 }
+
 @Component({
   selector: 'app-apidatatable',
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatCardModule,
+    NgForOf
+  ],
   templateUrl: './apidatatable.component.html',
-  styleUrl: './apidatatable.component.sass'
+  styleUrl: './apidatatable.component.sass',
+  standalone: true
 })
-  
+export class ApidatatableComponent implements AfterViewInit {
+  displayedColumns: string[] = []; // Sin columnas por ahora
+  dataSource: MatTableDataSource<any> = new MatTableDataSource(); // Tabla vacía
 
-export class ApidatatableComponent {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
-  dataSource: MatTableDataSource<UserData>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
   private jsonApiUrl = 'https://jsonplaceholder.typicode.com/posts';
-  constructor(private jsonplaceholderService: JsonplaceholderService) {
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-    this.dataSource = new MatTableDataSource(users);
-  }
-    ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.jsonplaceholderService
-      .getApiData<Jsonplaceholderinterface[]>(this.jsonApiUrl)
-      .subscribe((jsonplace: Jsonplaceholderinterface[]) => {
-        console.group('app-genericview');
-        console.log(jsonplace);
+
+  constructor(private jsonplaceholderService: JsonplaceholderService) {}
+
+  ngOnInit(): void {
+    // No se consume ningún API aún
+        this.jsonplaceholderService.getApiData<Jsonplaceholderinterface[]>(this.jsonApiUrl)
+      .subscribe((response: Jsonplaceholderinterface[]) => {
+        console.group('Datos de la API');
+        console.log(response);
         console.groupEnd();
-        console.group('object keys');
-        console.log(Object.keys(jsonplace[0]));
-        console.groupEnd();
+
+        // Asignar las columnas dinámicamente
+        this.displayedColumns = Object.keys(response[0]);
+
+        // Asignar los datos a la tabla
+        this.dataSource.data = response;
       });
   }
-    ngAfterViewInit() {
+
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  
-    applyFilter(event: Event) {
+
+  applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
-      }    
+    }
   }
-}
-
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-  };
 }
