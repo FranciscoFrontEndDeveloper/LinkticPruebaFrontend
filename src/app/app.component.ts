@@ -17,7 +17,7 @@ export class AppComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.jsonplaceholderService
-      .getApiData(this.jsonApiUrl)
+      .getApiData<Jsonplaceholderinterface[]>(this.jsonApiUrl)
       .subscribe((jsonplace: Jsonplaceholderinterface[]) => {
         console.group('json place holder');
         console.log(jsonplace);
