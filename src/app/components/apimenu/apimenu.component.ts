@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { GenericviewComponent } from "../genericview/genericview.component";
 @Component({
   selector: 'app-apimenu',
-  imports: [MatSlideToggleModule],
+  imports: [MatSidenavModule, GenericviewComponent],
   templateUrl: './apimenu.component.html',
-  styleUrl: './apimenu.component.sass'
+  styleUrl: './apimenu.component.sass',
 })
 export class ApimenuComponent {
 

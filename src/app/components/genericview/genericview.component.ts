@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { JsonplaceholderService } from '../../services/jsonplaceholder.service';
 import { Jsonplaceholderinterface } from '../../jsonplaceholderinterface';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-genericview',
-  imports: [],
+  imports: [MatCardModule],
   templateUrl: './genericview.component.html',
   styleUrl: './genericview.component.sass'
 })
