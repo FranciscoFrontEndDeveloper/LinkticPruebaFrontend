@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { JsonplaceholderService } from './services/jsonplaceholder.service';
-import { Jsonplaceholderinterface } from './jsonplaceholderinterface';
-import { GenericviewComponent } from "./components/genericview/genericview.component";
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ApimenuComponent } from "./components/apimenu/apimenu.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, GenericviewComponent, ApimenuComponent],
+  imports: [RouterOutlet, ApimenuComponent,MatSlideToggleModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass',
 })
