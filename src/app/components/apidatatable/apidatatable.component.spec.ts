@@ -46,4 +46,10 @@ describe('ApidatatableComponent', () => {
     expect(component.dataSource.data.length).toBeGreaterThan(0);
   });
 
+  it('Usa una expresion regular para extraer el nombre de la API desde una URL', () => {
+  const url = 'https://jsonplaceholder.typicode.com/posts';
+  const result = component.getApiNameFromUrl(url);
+  expect(result).toBe('jsonplaceholder');
+});
+
 });
