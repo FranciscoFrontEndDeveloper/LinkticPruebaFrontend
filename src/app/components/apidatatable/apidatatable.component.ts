@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ModaldetailsComponent } from '../modaldetails/modaldetails.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { ApifilterComponent } from "../apifilter/apifilter.component";
+import { ApifilterComponent } from '../apifilter/apifilter.component';
 @Component({
   selector: 'app-apidatatable',
   imports: [
@@ -26,14 +26,15 @@ import { ApifilterComponent } from "../apifilter/apifilter.component";
     MatButtonModule,
     MatDialogModule,
     MatSidenavModule,
-    ApifilterComponent
+    ApifilterComponent,
   ],
   templateUrl: './apidatatable.component.html',
   styleUrl: './apidatatable.component.sass',
   standalone: true,
 })
 export class ApidatatableComponent implements AfterViewInit {
-  displayedColumns: string[] = []; // Sin columnas por ahora
+  displayedColumns: string[] = [];
+  someArray: any[] = []; // Sin columnas por ahora
   dataSource: MatTableDataSource<any> = new MatTableDataSource(); // Tabla vacía
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -41,6 +42,7 @@ export class ApidatatableComponent implements AfterViewInit {
 
   private jsonApiUrl = 'https://jsonplaceholder.typicode.com/posts';
   public titleApi!: string;
+
   constructor(
     private jsonplaceholderService: JsonplaceholderService,
     private dialog: MatDialog
@@ -49,7 +51,6 @@ export class ApidatatableComponent implements AfterViewInit {
   }
 
   ngOnInit(): void {
-    // No se consume ningún API aún
     this.jsonplaceholderService
       .getApiData<Jsonplaceholderinterface[]>(this.jsonApiUrl)
       .subscribe((response: Jsonplaceholderinterface[]) => {
@@ -80,7 +81,12 @@ export class ApidatatableComponent implements AfterViewInit {
       data: { mensaje: 'modal cerrado' },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('this dentro de afterClosed:', this);
+      if (result) {
+        this.someArray.push(result);
+      }
+    });
   }
 
   getApiNameFromUrl(url: string): string {
