@@ -69,6 +69,16 @@ describe('ApidatatableComponent', () => {
   it('Debe retornar cadena vacía si la URL no es válida', () => {
   const result = component.getApiNameFromUrl('sin-formato');
   expect(result).toBe('');
+  });
+  
+  it('Debe aplicar filtro incluso si el paginador no está definido', () => {
+  component.dataSource.paginator = undefined as any;
+
+  const event = { target: { value: 'Post' } } as unknown as Event;
+  component.applyFilter(event);
+
+  expect(component.dataSource.filter).toBe('post');
+  // No debe lanzar error aunque paginator no exista
 });
 
 });
