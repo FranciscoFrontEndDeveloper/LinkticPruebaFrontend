@@ -50,6 +50,20 @@ describe('ApidatatableComponent', () => {
   const url = 'https://jsonplaceholder.typicode.com/posts';
   const result = component.getApiNameFromUrl(url);
   expect(result).toBe('jsonplaceholder');
+  });
+  
+  it('Debe aplicar el filtro correctamente a la tabla', () => {
+  const inputEvent = {
+    target: { value: 'post 1' }
+  } as unknown as Event;
+
+  component.dataSource.data = [
+    { userId: 1, id: 1, title: 'Post 1', body: 'Content 1' },
+    { userId: 2, id: 2, title: 'Otro', body: 'Otro contenido' }
+  ];
+
+  component.applyFilter(inputEvent);
+  expect(component.dataSource.filter).toBe('post 1');
 });
 
 });
