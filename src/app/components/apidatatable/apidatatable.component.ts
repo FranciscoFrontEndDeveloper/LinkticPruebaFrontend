@@ -11,6 +11,8 @@ import { NgForOf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ModaldetailsComponent } from '../modaldetails/modaldetails.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { ApifilterComponent } from "../apifilter/apifilter.component";
 @Component({
   selector: 'app-apidatatable',
   imports: [
@@ -23,6 +25,8 @@ import { ModaldetailsComponent } from '../modaldetails/modaldetails.component';
     NgForOf,
     MatButtonModule,
     MatDialogModule,
+    MatSidenavModule,
+    ApifilterComponent
   ],
   templateUrl: './apidatatable.component.html',
   styleUrl: './apidatatable.component.sass',
