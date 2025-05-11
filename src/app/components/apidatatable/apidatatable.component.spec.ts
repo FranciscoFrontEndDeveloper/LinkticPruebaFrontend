@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ApidatatableComponent } from './apidatatable.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ApidatatableComponent', () => {
   let component: ApidatatableComponent;
@@ -8,7 +8,7 @@ describe('ApidatatableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ApidatatableComponent]
+      imports: [ApidatatableComponent,HttpClientTestingModule]
     })
     .compileComponents();
 
@@ -17,7 +17,7 @@ describe('ApidatatableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('El componente se crea exitosamente', () => {
     expect(component).toBeTruthy();
   });
 });

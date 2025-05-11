@@ -11,29 +11,28 @@ describe('ApimenuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ApimenuComponent],
-            providers: [
-            {
-              provide: ActivatedRoute,
-              useValue: {
-                params: of({}), 
-                snapshot: {
-                  paramMap: {
-                    get: () => null
-                  }
-                }
-              }
-            }
-          ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({}),
+            snapshot: {
+              paramMap: {
+                get: () => null,
+              },
+            },
+          },
+        },
+      ],
       schemas: [NO_ERRORS_SCHEMA],
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ApimenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('El componente se crea exitosamente', () => {
     expect(component).toBeTruthy();
   });
 });

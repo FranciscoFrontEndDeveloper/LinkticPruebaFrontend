@@ -1,9 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import {
-  provideHttpClientTesting,
-  HttpTestingController,
-   
-} from '@angular/common/http/testing';
+import {provideHttpClientTesting,HttpTestingController} from '@angular/common/http/testing';
 import { JsonplaceholderService } from './jsonplaceholder.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 

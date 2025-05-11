@@ -51,7 +51,7 @@ describe('MaincomponentComponent', () => {
   expect(button).toBeTruthy();
   });
   
-  it('debe mostrar el texto "start" y el ícono "login" en el botón', () => {
+  it('Debe mostrar el texto "start" y el ícono "login" en el botón', () => {
   const compiled = fixture.nativeElement as HTMLElement;
   const button = compiled.querySelector('button[routerLink="/apimenu"]');
   const icon = button?.querySelector('mat-icon');

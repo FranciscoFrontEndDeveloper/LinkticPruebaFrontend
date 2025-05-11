@@ -17,7 +17,7 @@ describe('ApifilterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('El componente se crea exitosamente', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -8,22 +8,21 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
-  it('should create the app', () => {
+  it('El componente se crea exitosamente', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'masterApis' title`, () => {
+  it(`el texto en pantalla de ser master of apis`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('masterApis');
+    expect(app.title).toEqual('master of apis');
   });
 
-  it('should render title', () => {
+  it('Debe contener el Router Outlet', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, masterApis');
+    expect(compiled.querySelector('router-outlet')).not.toBeNull();
   });
 });
