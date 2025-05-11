@@ -8,14 +8,9 @@ import { JsonplaceholderService } from '../../services/jsonplaceholder.service';
 import { Jsonplaceholderinterface } from '../../jsonplaceholderinterface';
 import { MatCardModule } from '@angular/material/card';
 import { NgForOf } from '@angular/common';
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  fruit: string;
-}
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ModaldetailsComponent } from '../modaldetails/modaldetails.component';
 @Component({
   selector: 'app-apidatatable',
   imports: [
@@ -25,11 +20,13 @@ export interface UserData {
     MatSortModule,
     MatPaginatorModule,
     MatCardModule,
-    NgForOf
+    NgForOf,
+    MatButtonModule,
+    MatDialogModule,
   ],
   templateUrl: './apidatatable.component.html',
   styleUrl: './apidatatable.component.sass',
-  standalone: true
+  standalone: true,
 })
 export class ApidatatableComponent implements AfterViewInit {
   displayedColumns: string[] = []; // Sin columnas por ahora
@@ -39,30 +36,28 @@ export class ApidatatableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   private jsonApiUrl = 'https://jsonplaceholder.typicode.com/posts';
-
-  constructor(private jsonplaceholderService: JsonplaceholderService) {}
+  public titleApi!: string;
+  constructor(
+    private jsonplaceholderService: JsonplaceholderService,
+    private dialog: MatDialog
+  ) {
+    this.titleApi = this.getApiNameFromUrl(this.jsonApiUrl);
+  }
 
   ngOnInit(): void {
     // No se consume ningún API aún
-        this.jsonplaceholderService.getApiData<Jsonplaceholderinterface[]>(this.jsonApiUrl)
+    this.jsonplaceholderService
+      .getApiData<Jsonplaceholderinterface[]>(this.jsonApiUrl)
       .subscribe((response: Jsonplaceholderinterface[]) => {
-        console.group('Datos de la API');
-        console.log(response);
-        console.groupEnd();
-
-        // Asignar las columnas dinámicamente
         this.displayedColumns = Object.keys(response[0]);
-
-        // Asignar los datos a la tabla
         this.dataSource.data = response;
         this.dataSource = new MatTableDataSource(response);
-      this.dataSource.paginator = this.paginator; 
+        this.dataSource.paginator = this.paginator;
       });
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    
     this.dataSource.sort = this.sort;
   }
 
@@ -74,7 +69,18 @@ export class ApidatatableComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  openModal() {
-    console.log('Se abrio el modal')
+  openModal(): void {
+    const dialogRef = this.dialog.open(ModaldetailsComponent, {
+      width: '400px',
+      height: '500px',
+      data: { mensaje: 'modal cerrado' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
+
+  getApiNameFromUrl(url: string): string {
+    const match = url.match(/https?:\/\/(?:www\.)?([^\.]+)/);
+    return match ? match[1] : '';
   }
 }
