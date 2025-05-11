@@ -52,7 +52,7 @@ describe('ApidatatableComponent', () => {
   expect(result).toBe('jsonplaceholder');
   });
   
-  it('Debe aplicar el filtro correctamente a la tabla', () => {
+  it('Debe filtrar los datos de la tabla segun se ingresen', () => {
   const inputEvent = {
     target: { value: 'post 1' }
   } as unknown as Event;
@@ -64,6 +64,11 @@ describe('ApidatatableComponent', () => {
 
   component.applyFilter(inputEvent);
   expect(component.dataSource.filter).toBe('post 1');
+  });
+  
+  it('Debe retornar cadena vacía si la URL no es válida', () => {
+  const result = component.getApiNameFromUrl('sin-formato');
+  expect(result).toBe('');
 });
 
 });
