@@ -1,14 +1,11 @@
-:host
-  display: flex
-  flex-direction: column
-  align-items: flex-start
+
 .sidebar
-  width: 100%
+  width: auto
   height: 100vh
-  background: #000
+  background: #052659
   display: flex
   flex-direction: column
-  justify-content: center
+  justify-content: start
   padding: 10px
   div
     h2
@@ -17,11 +14,22 @@
       text-align: center
 .filterSelect
   display: flex
-  flex-direction: row
+  flex-direction: column
   width: 100%
 .filterInput
-  background: red
   .matInput
     width: 100%
 .matInput
   width: 100%
+.textContainerFilter
+  p
+    color: #fff
+    text-align: center
+
+@media screen and ( max-width: 430px )
+  .filterSelect
+    display: flex
+    flex-direction: column
+    width: 100%
+  .sidebar
+    height: 100%
