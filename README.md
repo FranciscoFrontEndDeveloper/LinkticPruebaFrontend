@@ -1,59 +1,87 @@
-# MasterApis
+# Master of APIs
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.11.
+Aplicación web desarrollada como parte de una prueba técnica frontend. Su objetivo es mostrar y filtrar un conjunto de APIs REST públicas abiertas, permitiendo al usuario consultar una lista organizada y explorar sus detalles de forma sencilla. Desarrollada con Angular y Angular Material.
 
-## Development server
+## 1. Demo en Producción
 
-To start a local development server, run:
+- 🌐 [Ver aplicación en Vercel](https://linktic-prueba-frontend.vercel.app/)
+- 📁 [Repositorio en GitHub](https://github.com/FranciscoFrontEndDeveloper/LinkticPruebaFrontend)
+
+## 2. Tecnologías Usadas
+
+- Angular 19
+- Angular Material
+- TypeScript
+- SCSS
+- Git / GitHub
+- Vercel
+
+## 3. Estructura del Proyecto
+
+'masterApis/
+├── src/
+│   ├── app/
+│   │   ├── components/
+│   │   │   ├── apidatatable/     # Muestra datos de las APIs en tabla
+│   │   │   ├── apifilter/        # Filtro de búsqueda por tema
+│   │   │   ├── apimenu/          # Menú principal de navegación
+│   │   │   ├── genericview/      # Vista genérica para errores o estados vacíos
+│   │   │   ├── maincomponent/    # Componente principal del flujo
+│   │   ├── services/
+│   │   │   ├── jsonplaceholder/  # Servicio para consumo de API
+│   ├── assets/
+│   └── index.html'
+
+
+## 4. Instalación Local
 
 ```bash
+git clone https://github.com/FranciscoFrontEndDeveloper/LinkticPruebaFrontend.git
+cd masterApis
+npm install
 ng serve
-```
+5. Funcionalidades
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+    Listado de APIs públicas con información organizada.
 
-## Code scaffolding
+    Filtro por palabra clave o tema.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+    Vista de detalles de una API individual.
 
-```bash
-ng generate component component-name
-```
+    Manejo de errores simples (fallo en fetch, datos vacíos).
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+    Interfaz responsiva y agradable visualmente con Angular Material.
 
-```bash
-ng generate --help
-```
+6. Pruebas Unitarias
 
-## Building
+Se implementaron pruebas unitarias con cobertura destacada sobre componentes clave y servicios:
 
-To build the project run:
+Statements   : 88.09% ( 37/42 )
+Branches     : 75%    ( 3/4 )
+Functions    : 83.33% ( 10/12 )
+Lines        : 86.48% ( 32/37 )
 
-```bash
-ng build
-```
+7. Decisiones Técnicas
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+    El primer día se hizo un proceso de planificación, conceptualización e implementación, evaluando el alcance viable dentro del plazo de entrega.
 
-## Running unit tests
+    Se optó por Angular Material para acelerar el desarrollo visual por su integración fluida con Angular.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+    Se creó un servicio genérico para facilitar la reutilización en futuros componentes.
 
-```bash
-ng test
-```
+    Se elaboró un mockup inicial simple como guía para definir la cantidad de componentes y el flujo básico de navegación.
 
-## Running end-to-end tests
+8. Mockup Inicial
 
-For end-to-end (e2e) testing, run:
+Se adjunta como referencia el diseño preliminar creado durante el primer día de trabajo.
+[mockup Linktic Frontend Test-Page 1.pdf](https://github.com/user-attachments/files/20154106/mockup.Linktic.Frontend.Test-Page.1.pdf)
 
-```bash
-ng e2e
-```
+9. Mejoras Futuras
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+    Agregar más APIs públicas a la base.
 
-## Additional Resources
+    Mejorar el filtrado con categorías múltiples o etiquetas.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+    Implementar paginación y carga perezosa.
+
+    Añadir pruebas end-to-end (E2E).
